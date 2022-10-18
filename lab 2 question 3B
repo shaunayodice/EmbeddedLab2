@@ -1,0 +1,43 @@
+ MSP430 Assembler Code Template for use with TI Code Composer Studio
+;
+;
+;-------------------------------------------------------------------------------
+            .cdecls C,LIST,"msp430.h"       ; Include device header file
+            
+;-------------------------------------------------------------------------------
+            .def    RESET                   ; Export program entry-point to
+                                            ; make it known to linker.
+;-------------------------------------------------------------------------------
+            .text                           ; Assemble into program memory.
+            .retain                         ; Override ELF conditional linking
+                                            ; and retain current section.
+            .retainrefs                     ; And retain any sections that have
+                                            ; references to current section.
+
+;-------------------------------------------------------------------------------
+RESET       mov.w   #__STACK_END,SP         ; Initialize stackpointer
+StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
+
+
+;-------------------------------------------------------------------------------
+; Main loop here
+;-------------------------------------------------------------------------------
+
+	mov.b #0000h, R4;
+	mov.b #0006h, R5;
+	mov.b #0004h, R9;
+
+	OR R5, R4;
+
+	cmp R4, R5;
+
+	jne R4_NOT_EQ;
+
+	jmp $;
+
+R4_NOT_EQ:
+
+	mov.w #0004h, R9;
+	inv.w R9;
+	mov.w R9, R10;
+	jmp $;
