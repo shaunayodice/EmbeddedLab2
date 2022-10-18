@@ -1,38 +1,31 @@
 #include <msp430.h> 
 
 
+int OF(int X, int Y){
+
+        int sum = X + Y;
+        return sum;
+    }
+
 /**
  * main.c
  */
-
-float b = 1.0;
-
-
 int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
+
+
+	    int X = 0b1111111111111111;
+	    int Y = 0b1000000000000000;
+
+
+	    int W;
+
+	    W = OF(X,Y);
+
+
+	    while(1);
+
 	
-	int a = 5; //creates a local integer value
-
-	a+=1; // increments the int a by 1
-
-	b-=1; // decrements the float value by 1
-
-	unsigned char X = 0x0f;
-	unsigned char Y = 0x5;
-
-	unsigned char W;
-	unsigned char K;
-
-	W = X | Y;
-	K = X & Y;
-
-
-
-
-
-
-
-
 	return 0;
 }
